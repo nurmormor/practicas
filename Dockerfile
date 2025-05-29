@@ -1,26 +1,31 @@
-# Usamos PHP con Apache
+# Etapa 1: Build de assets
+FROM node:20 AS frontend
+
+WORKDIR /app
+COPY package*.json ./
+RUN npm install
+COPY . .
+RUN npm run build
+
+# Etapa 2: Backend PHP
 FROM php:8.2-apache
 
-# Instalamos dependencias del sistema
 RUN apt-get update && apt-get install -y \
     git unzip curl libzip-dev libonig-dev libxml2-dev zip \
     && docker-php-ext-install pdo pdo_mysql zip
 
-# Habilitamos mod_rewrite para Laravel
 RUN a2enmod rewrite
 
-# Instalar Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Establecer directorio de trabajo
 WORKDIR /var/www/html
 
-# Copiar archivos del proyecto
+# Copiamos el backend
 COPY . .
 
-# Asignar permisos
-RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 755 /var/www/html
+# Sobrescribimos los assets públicos desde la etapa frontend
+COPY --from=frontend /app/public/build ./public/build
 
-# Exponer el puerto del servidor
+RUN chown -R www-data:www-data /var/www/html && chmod -R 755 /var/www/html
+
 EXPOSE 80
