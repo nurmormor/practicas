@@ -24,29 +24,28 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 # Establecer directorio de trabajo
 WORKDIR /var/www/html
 
-# Copiar solo el backend (Laravel) — ajusta esto si está en una subcarpeta
+# Copiar backend Laravel (ajusta si está en subcarpeta)
 COPY . .
 
-# Copiar los assets compilados desde frontend (a public/build)
+# Copiar assets compilados desde frontend
 COPY --from=frontend /app/public/build ./public/build
 
 # Establecer permisos adecuados
 RUN chown -R www-data:www-data /var/www/html && chmod -R 755 /var/www/html
 
-# Establecer DocumentRoot en public/
-RUN echo '<VirtualHost *:80>
-    ServerAdmin webmaster@localhost
-    DocumentRoot /var/www/html/public
-
-    <Directory /var/www/html/public>
-        Options Indexes FollowSymLinks
-        AllowOverride All
-        Require all granted
-    </Directory>
-
-    ErrorLog ${APACHE_LOG_DIR}/error.log
-    CustomLog ${APACHE_LOG_DIR}/access.log combined
-</VirtualHost>' > /etc/apache2/sites-available/000-default.conf
-
-# Exponer el puerto 80
+# Configurar Apache para servir desde /public
+RUN printf '%s\n' \
+"<VirtualHost *:80>" \
+"    DocumentRoot /var/www/html/public" \
+"" \
+"    <Directory /var/www/html/public>" \
+"        Options Indexes FollowSymLinks" \
+"        AllowOverride All" \
+"        Require all granted" \
+"    </Directory>" \
+"" \
+"    ErrorLog \${APACHE_LOG_DIR}/error.log" \
+"    CustomLog \${APACHE_LOG_DIR}/access.log combined" \
+"</VirtualHost>" \
+> /etc/apache2/sites-available/000-default.conf
 EXPOSE 80
