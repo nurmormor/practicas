@@ -13,7 +13,7 @@ FROM php:8.2-apache
 # Instalar extensiones necesarias
 RUN apt-get update && apt-get install -y \
     git unzip curl libzip-dev libonig-dev libxml2-dev zip \
-    && docker-php-ext-install pdo pdo_mysql zip
+    && docker-php-ext-install pdo pdo_mysql zip exif
 
 # Habilitar mod_rewrite en Apache
 RUN a2enmod rewrite
