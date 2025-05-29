@@ -8,4 +8,9 @@ export default defineConfig({
             refresh: true,
         }),
     ],
+
+    server:{
+        https:true,
+        host:'practicas.aezer.net'
+    }
 });
