@@ -22,14 +22,7 @@
     <!-- Settings Dropdown or Login/Register buttons -->
     <div class="flex items-center space-x-4 lg:mr-2 xl:mr-2 2xl:mr-2">
         @auth
-            <div>
-                <svg width="35" height="34" viewBox="0 0 35 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="0.927002" width="34" height="34" rx="5" fill="#EAEAEA" />
-                    <path
-                        d="M26.927 26L22.441 21.506M24.927 15.5C24.927 17.7543 24.0315 19.9163 22.4374 21.5104C20.8434 23.1045 18.6813 24 16.427 24C14.1727 24 12.0107 23.1045 10.4166 21.5104C8.82254 19.9163 7.927 17.7543 7.927 15.5C7.927 13.2457 8.82254 11.0837 10.4166 9.48959C12.0107 7.89553 14.1727 7 16.427 7C18.6813 7 20.8434 7.89553 22.4374 9.48959C24.0315 11.0837 24.927 13.2457 24.927 15.5V15.5Z"
-                        stroke="#22B3B2" stroke-width="2" stroke-linecap="round" />
-                </svg>
-            </div>
+
 
             <div>
                 @if (auth()->user()->getFirstMediaUrl('avatar'))

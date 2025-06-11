@@ -4,7 +4,7 @@
 
         <table class="w-full border-collapse border border-gray-300">
             <thead>
-                <tr class="bg-gray-200">
+                <tr class="bg-gray-200 text-left">
                     <th class="border p-2">Nombre</th>
                     <th class="border p-2">Apellidos</th>
                     <th class="border p-2">Email</th>

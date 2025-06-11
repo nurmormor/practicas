@@ -9,7 +9,7 @@
 
         <h1 class="text-2xl font-bold mb-4">Lista de Profesores</h1>
 
-        <table class="w-full border-collapse border border-gray-300">
+        <table class="w-full border-collapse border border-gray-300 text-left">
             <thead>
                 <tr class="bg-gray-200">
                     <th class="border p-2">Nombre</th>

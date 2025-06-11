@@ -26,7 +26,7 @@
             </thead>
             <tbody>
                 @foreach ($unidad->alumnos as $alumno)
-                    <tr class="border">
+                    <tr class="border text-center">
                         <td class="p-2">{{ $alumno->nombre }}</td>
                         <td class="p-2">{{ $alumno->apellidos }}</td>
                         <td class="p-2">{{ $alumno->email }}</td>
